@@ -8,12 +8,18 @@
  */
 
 const updateSpots = function(state, appointments, id) {
-
-  // THIS IS NOT THE SOLUTION!!!
-  const updatedDays   = [...state.days]
-
-  // return an updated days array
-  return updatedDays
+  const days = [...state.days]
+  return days.map(day => {
+    const newDay = {...day}
+    let spots = 0;
+    newDay.appointments.forEach(id => {
+      if(appointments[id].interview === null) {
+        spots++;
+      }
+    })
+    newDay.spots = spots;
+    return newDay;
+  })
 };
 
 module.exports = updateSpots;
